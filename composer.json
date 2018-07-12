@@ -1,0 +1,43 @@
+{
+  "name": "mle86/enum",
+  "type": "library",
+  "description": "A base class for enum functionality in PHP.",
+  "license": "MIT",
+
+  "authors": [
+    {
+      "name": "Maximilian Eul",
+      "email": "maximilian@eul.cc",
+      "homepage": "https://github.com/mle86/php-enum"
+    }
+  ],
+
+  "autoload": {
+    "psr-4": {
+      "mle86\\Enum\\": "src/"
+    }
+  },
+
+  "autoload-dev": {
+    "psr-4": {
+      "mle86\\Enum\\Tests\\": "test/"
+    }
+  },
+
+  "require-dev": {
+    "phpunit/phpunit": "^7.1.5",
+    "php-coveralls/php-coveralls": "^2.0",
+    "roave/security-advisories": "dev-master"
+  },
+
+  "require": {
+    "php": ">=7.1"
+  },
+
+  "suggest": {
+  },
+
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  }
+}

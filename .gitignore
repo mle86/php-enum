@@ -1,0 +1,8 @@
+/vendor/
+/phpunit.xml
+/composer.phar
+/composer.lock
+/.idea/
+/build/logs/
+TEST.php
+TEST-*.php
