@@ -40,12 +40,12 @@ class AbstractAutoEnumTest extends TestCase
         $this->assertTrue(TestAutoEnum::isValid($valid_value));
 
         TestAutoEnum::validate($valid_value);
-        TestAutoEnum::validateOrNull($valid_value);
+        TestAutoEnum::validateOptional($valid_value);
 
         $instance = new TestAutoEnum($valid_value);
         $this->assertSame($valid_value, $instance->value());
         $this->assertTrue(TestAutoEnum::isValid($instance));
-        TestAutoEnum::validateOrNull($instance);
+        TestAutoEnum::validateOptional($instance);
     }
 
     /**
@@ -61,10 +61,10 @@ class AbstractAutoEnumTest extends TestCase
         });
 
         if ($invalid_value === null) {
-            // we cannot test that here, validateOrNull would _accept_ that value
+            // we cannot test that here, validateOptional would _accept_ that value
         } else {
             $this->assertException(EnumValueException::class, function () use ($invalid_value) {
-                TestAutoEnum::validateOrNull($invalid_value);
+                TestAutoEnum::validateOptional($invalid_value);
             });
         }
 

@@ -14,7 +14,7 @@ use function in_array;
  * It also implements a constructor with useful error messages
  * in case of invalid input.
  *
- * Additionally, it provides the {@see validate()} and {@see validateOrNull()} helper methods.
+ * Additionally, it provides the {@see validate()} and {@see validateOptional()} helper methods.
  */
 abstract class AbstractEnum extends AbstractSerializableValue implements Enum
 {
@@ -75,7 +75,7 @@ abstract class AbstractEnum extends AbstractSerializableValue implements Enum
      * @return void Returns if the value is valid or NULL.
      * @throws EnumValueException if the input value is not NULL and not valid.
      */
-    public static function validateOrNull($value, string $forKey = null): void
+    public static function validateOptional($value, string $forKey = null): void
     {
         if ($value === null) {
             // ok, we explicitly allow this here without further checks

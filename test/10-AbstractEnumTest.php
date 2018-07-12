@@ -25,7 +25,7 @@ class AbstractEnumTest extends TestCase
     ]; }
 
     public static function illegalInput(): array { return [
-        [null],  // considered invalid, but validateOrNull() won't complain about it
+        [null],  // considered invalid, but validateOptional() won't complain about it
         [false],
         [3.3],
         [new \stdClass],
@@ -41,7 +41,7 @@ class AbstractEnumTest extends TestCase
     {
         $this->assertTrue(FirstTenPrimesEnum::isValid($valid_value));
         FirstTenPrimesEnum::validate($valid_value);
-        FirstTenPrimesEnum::validateOrNull($valid_value);
+        FirstTenPrimesEnum::validateOptional($valid_value);
     }
 
     /**
@@ -74,10 +74,10 @@ class AbstractEnumTest extends TestCase
         });
 
         if ($invalid_value === null) {
-            // we cannot test that here, validateOrNull would _accept_ that value
+            // we cannot test that here, validateOptional would _accept_ that value
         } else {
             $this->assertException(EnumValueException::class, function () use ($invalid_value) {
-                FirstTenPrimesEnum::validateOrNull($invalid_value);
+                FirstTenPrimesEnum::validateOptional($invalid_value);
             });
         }
 
@@ -92,7 +92,7 @@ class AbstractEnumTest extends TestCase
      */
     public function testValidateNull(): void
     {
-        FirstTenPrimesEnum::validateOrNull(null);
+        FirstTenPrimesEnum::validateOptional(null);
     }
 
     /**
