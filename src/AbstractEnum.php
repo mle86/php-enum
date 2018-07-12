@@ -19,6 +19,12 @@ use function in_array;
 abstract class AbstractEnum extends AbstractSerializableValue implements Enum
 {
 
+    /**
+     * Default implementation
+     * according to the {@see Enum::__construct()} interface contract.
+     *
+     * @param mixed|static $value
+     */
     public function __construct($value)
     {
         try {
@@ -66,7 +72,7 @@ abstract class AbstractEnum extends AbstractSerializableValue implements Enum
     /**
      * Like {@see validate()},
      * but always accepts NULL values
-     * (even if they {@see isValid} test method does not accept them).
+     * (even if the {@see isValid} test method does not accept them).
      *
      * This is useful for optional values.
      *

@@ -14,6 +14,11 @@ abstract class AbstractAutoEnum extends AbstractEnum
 
     private static $_all_list = [];
 
+    /**
+     * Returns a list of all public constant values in this class.
+     *
+     * @return array
+     */
     public static function all(): array
     {
         $className = static::class;

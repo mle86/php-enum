@@ -6,7 +6,7 @@ use mle86\Enum\Exception\EnumValueException;
 use mle86\Value\Value;
 
 /**
- * Common interface for all Enum classes.
+ * Common interface for all enum classes.
  *
  * Interface contract:
  *  - All enum classes have an {@see all()} class method that returns all valid values.
