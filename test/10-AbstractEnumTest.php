@@ -2,6 +2,7 @@
 
 namespace mle86\Enum;
 
+use mle86\Enum\AbstractEnum;
 use mle86\Enum\Tests\Helper\AssertException;
 use mle86\Enum\Tests\Helper\FirstTenPrimesEnum;
 use mle86\Enum\Exception\EnumValueException;
@@ -53,6 +54,8 @@ class AbstractEnumTest extends TestCase
         $instance = new FirstTenPrimesEnum($valid_value);
         $this->assertSame($valid_value, $instance->value());
         $this->assertTrue(FirstTenPrimesEnum::isValid($instance));
+        $this->assertTrue($instance->equals($valid_value));
+        $this->assertTrue($instance->equals($instance));
     }
 
     /**
@@ -105,6 +108,68 @@ class AbstractEnumTest extends TestCase
 
         $this->assertTrue(FirstTenPrimesEnum::isValid($instance));
         $this->assertSame($valid_value, $instance->value());
+    }
+
+    /**
+     * @depends testInstantiateValidValues
+     */
+    public function testSerialization(): void
+    {
+        $valid_value = FirstTenPrimesEnum::PRIME9;
+
+        $instance = new FirstTenPrimesEnum($valid_value);
+
+        $this->assertSame((string)$valid_value, (string)$instance);
+        $this->assertTrue(($instance == (string)$valid_value));
+
+        $this->assertSame(json_encode($valid_value), json_encode($instance));
+        $this->assertEquals($instance, unserialize(serialize($instance)));
+    }
+
+    /**
+     * @depends testValidValues
+     * @depends testInvalidValues
+     * @depends testSerialization
+     */
+    public function testEquality(): void
+    {
+        $valid_value = FirstTenPrimesEnum::PRIME7;
+        $other_value = FirstTenPrimesEnum::PRIME3;
+
+        $instance = new FirstTenPrimesEnum($valid_value);
+        $this->assertSame($valid_value, $instance->value());
+        $this->assertTrue(((string)$valid_value == (string)$instance));
+        $this->assertTrue($instance->equals($valid_value));
+
+        // different instance, same value inside:
+        $similar_instance = new FirstTenPrimesEnum($valid_value);
+        $this->assertTrue(($instance == $similar_instance));
+        $this->assertTrue(($similar_instance == $instance));
+        $this->assertTrue($similar_instance->equals($valid_value));
+        $this->assertTrue($similar_instance->equals($instance));
+        $this->assertTrue($instance->equals($similar_instance));
+
+        // different instance with different value inside:
+        $other_instance = new FirstTenPrimesEnum($other_value);
+        $this->assertFalse(($instance == $other_instance));
+        $this->assertFalse(($other_instance == $instance));
+        $this->assertFalse($other_instance->equals($valid_value));
+        $this->assertFalse($other_instance->equals($instance));
+        $this->assertFalse($instance->equals($other_instance));
+
+        // This other enum class accepts some of the exact same values!
+        // Still, it's a different class.
+        $foreign_instance = new class($valid_value) extends AbstractEnum {
+            public static function all(): iterable
+            {
+                return [FirstTenPrimesEnum::PRIME3, FirstTenPrimesEnum::PRIME7];
+            }
+        };
+        $this->assertFalse(($instance == $foreign_instance));
+        $this->assertFalse(($foreign_instance == $instance));
+        $this->assertTrue($foreign_instance->equals($valid_value));  // it's the same raw value
+        $this->assertFalse($foreign_instance->equals($instance));  // different class
+        $this->assertFalse($instance->equals($foreign_instance));  // different class
     }
 
 }
