@@ -6,6 +6,7 @@ use mle86\Enum\AbstractEnum;
 use mle86\Enum\Tests\Helper\AssertException;
 use mle86\Enum\Tests\Helper\FirstTenPrimesEnum;
 use mle86\Enum\Exception\EnumValueException;
+use mle86\Value\AbstractSerializableValue;
 use PHPUnit\Framework\TestCase;
 
 class AbstractEnumTest extends TestCase
@@ -30,6 +31,15 @@ class AbstractEnumTest extends TestCase
         [3.3],
         [new \stdClass],
         [array(7)],
+    ]; }
+
+    public static function readableInvalidInput(): array { return [
+        // Used in testException().
+        [4444],
+        ['11'],
+        ['foo*bar'],
+        [new class(11) extends AbstractEnum { public static function all(): array { return [ 11 ]; } }],
+        [new class { public function __toString(): string { return '11'; } }],
     ]; }
 
 
@@ -170,6 +180,57 @@ class AbstractEnumTest extends TestCase
         $this->assertTrue($foreign_instance->equals($valid_value));  // it's the same raw value
         $this->assertFalse($foreign_instance->equals($instance));  // different class
         $this->assertFalse($instance->equals($foreign_instance));  // different class
+    }
+
+    /**
+     * @dataProvider readableInvalidInput
+     * @depends testInstantiateValidValues
+     * @depends testInvalidValues
+     */
+    public function testException($invalid_value): void
+    {
+        $expected_value = (string)$invalid_value;
+        if ($invalid_value === null) {
+            // we expect to see "null" in the exception msg now
+            $expected_value = 'null';
+        }
+
+        /** @var EnumValueException $ex */
+        $ex = $this->assertException(EnumValueException::class,
+            function() use($invalid_value) { return new FirstTenPrimesEnum($invalid_value); });
+        $this->assertExceptionContainsValueCopy   ($invalid_value, $ex);
+        $this->assertExceptionMessageContainsValue($expected_value, $ex);
+        $this->assertExceptionMessageContainsWord ('FirstTenPrimesEnum', $ex);
+
+        /** @var EnumValueException $ex */
+        $ex = $this->assertException(EnumValueException::class,
+            function() use($invalid_value) { FirstTenPrimesEnum::validate($invalid_value, 'my_prime'); });
+        $this->assertExceptionContainsValueCopy   ($invalid_value, $ex);
+        $this->assertExceptionMessageContainsValue($expected_value, $ex);
+        $this->assertExceptionMessageContainsWord ('my_prime', $ex);
+    }
+
+
+    private function assertExceptionMessageContainsWord(string $word, \Exception $e, string $message = ''): void
+    {
+        if ($message === '') {
+            $message = 'Enum exception message does not contain expected word!';
+        }
+
+        $regex = '/\b' . preg_quote($word, '/') . '\b/u';
+        $this->assertRegExp($regex, $e->getMessage(), $message);
+    }
+
+    private function assertExceptionMessageContainsValue($value, \Exception $e): void
+    {
+        $this->assertExceptionMessageContainsWord((string)$value, $e,
+            'Enum exception message does not contain the invalid input value!');
+    }
+
+    private function assertExceptionContainsValueCopy($value, EnumValueException $e): void
+    {
+        $this->assertSame($value, $e->getInvalidValue(),
+            'Enum exception does not contain the original invalid value!');
     }
 
 }
