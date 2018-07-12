@@ -5,6 +5,7 @@ namespace mle86\Enum;
 use mle86\Enum\Exception\EnumValueException;
 use mle86\Enum\Tests\Helper\AssertException;
 use mle86\Enum\Tests\Helper\TestAutoEnum;
+use mle86\Enum\Tests\Helper\TestEmptyAutoEnum;
 use PHPUnit\Framework\TestCase;
 
 class AbstractAutoEnumTest extends TestCase
@@ -12,12 +13,14 @@ class AbstractAutoEnumTest extends TestCase
     use AssertException;
 
     public static function validValues(): array { return [
+        // all valid for TestAutoEnum:
         [TestAutoEnum::C10],  // public const C10 = 10
         [TestAutoEnum::C20],  // public const C20 = 20
         [TestAutoEnum::C30],  // const C30 = 30
     ]; }
 
     public static function invalidValues(): array { return [
+        // not valid for TestAutoEnum:
         [40],  // protected const W40
         [50],  // private const Y50
         [60],
@@ -68,6 +71,23 @@ class AbstractAutoEnumTest extends TestCase
         $this->assertException(EnumValueException::class, function() use($invalid_value) {
             return new TestAutoEnum($invalid_value);
         });
+    }
+
+    public function testEmptyEnumClass(): void
+    {
+        $this->assertEmpty(TestEmptyAutoEnum::all());
+    }
+
+    /**
+     * @dataProvider validValues
+     * @dataProvider invalidValues
+     * @depends testInvalidValues
+     * @depends testEmptyEnumClass
+     * @param mixed $value
+     */
+    public function testEmptyEnumValues($value): void
+    {
+        $this->assertFalse(TestEmptyAutoEnum::isValid($value));
     }
 
 }
