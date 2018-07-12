@@ -31,7 +31,8 @@
   },
 
   "require": {
-    "php": ">=7.1"
+    "php": ">=7.1",
+    "mle86/value": "^1.1"
   },
 
   "suggest": {
