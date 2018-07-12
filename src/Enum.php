@@ -2,6 +2,7 @@
 
 namespace mle86\Enum;
 
+use mle86\Enum\Exception\EnumValueException;
 use mle86\Value\Value;
 
 /**
@@ -17,29 +18,46 @@ interface Enum extends Value
 {
 
     /**
-     * Wraps one value in a {@see Value} instance.
-     * The constructor will ensure that the value is actually allowed by this enum class.
+     * Wraps one value in an {@see Enum} instance.
+     * The value can later be accessed with the {@see value()} getter.
+     *
+     * The constructor will ensure that the value is actually allowed by this enum class
+     * using the {@see isValid()} test method.
+     *
+     * It is possible to use other instances of the same class as input.
+     * In this case, their wrapped value will be re-wrapped,
+     * resulting in two identical instances.
      *
      * @param mixed $value
+     * @throws EnumValueException if the input value is not valid.
      */
     public function __construct($value);
 
     /**
+     * Returns the value wrapped by this enum instance.
+     *
      * @return mixed
-     *   Returns the value wrapped by this enum instance.
      */
     public function value();
 
     /**
+     * Returns a list of all valid values in this enum class.
+     *
+     * Everything returned by this method is a valid input for the constructor
+     * and will pass the {@see isValid()} test method.
+     *
+     * The list should only contain unique values.
+     *
      * @return iterable
-     *   Returns a list of all valid values in this enum class.
      */
     public static function all(): iterable;
 
     /**
-     * Tests if one value is considered valid by this enum class.
+     * Tests if a value is considered valid by this enum class.
      *
-     * @param mixed $value
+     * Instances of the same class are also considered valid.
+     *
+     * @param mixed|static $value
      * @return bool
      */
     public static function isValid($value): bool;
