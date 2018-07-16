@@ -85,7 +85,7 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
                 return 'resource';
             }
 
-            return 'resource';
+            return 'resource (' . $type . ')';
         }
 
         if ($value instanceof Enum || $value instanceof Value) {
