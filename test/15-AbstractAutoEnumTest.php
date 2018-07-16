@@ -17,6 +17,7 @@ class AbstractAutoEnumTest extends TestCase
         [TestAutoEnum::C10],  // public const C10 = 10
         [TestAutoEnum::C20],  // public const C20 = 20
         [TestAutoEnum::C30],  // const C30 = 30
+        // This list must be _complete_ or testAllValidValues() will fail.
     ]; }
 
     public static function invalidValues(): array { return [
@@ -73,6 +74,30 @@ class AbstractAutoEnumTest extends TestCase
         });
     }
 
+    /**
+     * Ensure that {@see AbstractAutoEnum::all()} returns everything.
+     *
+     * @depends testValidValues
+     */
+    public function testAllValidValues(): void
+    {
+        $fn_unwrap = function(array $input) { return reset($input); };
+        $knownList = array_map($fn_unwrap, self::validValues());
+
+        $classList = TestAutoEnum::all();
+        $this->assertInternalType('array', $classList);
+
+        // The AbstractAutoEnum base class makes no promises about `all()`'s ordering,
+        // so we need to sort both lists once:
+        sort($knownList);
+        sort($classList);
+
+        $this->assertSame($knownList, $classList);
+    }
+
+    /**
+     * @depends testAllValidValues
+     */
     public function testEmptyEnumClass(): void
     {
         $this->assertEmpty(TestEmptyAutoEnum::all());
