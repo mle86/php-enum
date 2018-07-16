@@ -6,6 +6,9 @@ use mle86\Enum\Exception\EnumValueException;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * @internal
+ */
 trait AssertException
 {
 
