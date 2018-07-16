@@ -30,6 +30,7 @@ class AbstractEnumTest extends TestCase
         [false],
         [3.3],
         [new \stdClass],
+        ['7'],  // valid number, but invalid type (string instead of int)
         [array(7)],
     ]; }
 
