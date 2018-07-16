@@ -9,6 +9,32 @@ use mle86\Enum\Exception\EnumValueException;
 use mle86\Value\AbstractSerializableValue;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests the functionality of the library's {@see AbstractEnum} base class.
+ *
+ * This test class is based on an included dummy implementation, {@see FirstTenPrimesEnum},
+ * which is an extension of the {@see AbstractEnum} base class.
+ *
+ * The following tests are performed:
+ *
+ *  - Ensure that known valid values are accepted,
+ *    both by the class constructor, the `isValid()` test method, and the `validate()` assertion method.
+ *  - Ensure that known invalid and known illegal values are rejected,
+ *    both by the class constructor, the `isValid()` test method, and the `validate()` assertion method.
+ *    This includes otherwise valid input values cast to a different type (e.g. `"7"` vs `7`).
+ *  - Ensure that the `validateOptional()` assertion method actually accepts `null` values.
+ *  - Ensure that enum instances are considered valid themselves
+ *    and can be fed to the constructor to build an identical instance.
+ *  - Ensure that the serialization of instances (string typecasting and `json_encode`)
+ *    return the enum constant as expected.
+ *  - Ensure that the equality operator (`==`)
+ *    and the equality test method (`equals()`)
+ *    work as expected,
+ *    both on other instances, instances of other classes, and on raw values.
+ *  - Ensures that {@see EnumValueException}s
+ *    throws by the constructor and the `validate()` assertion method
+ *    reflect the offending value in their error message.
+ */
 class AbstractEnumTest extends TestCase
 {
     use AssertException;
@@ -87,7 +113,7 @@ class AbstractEnumTest extends TestCase
         if ($invalid_value === null) {
             // we cannot test that here, validateOptional would _accept_ that value
         } else {
-            $this->assertException(EnumValueException::class, function () use ($invalid_value) {
+            $this->assertException(EnumValueException::class, function() use ($invalid_value) {
                 FirstTenPrimesEnum::validateOptional($invalid_value);
             });
         }

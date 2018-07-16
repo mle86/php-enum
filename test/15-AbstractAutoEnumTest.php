@@ -8,6 +8,21 @@ use mle86\Enum\Tests\Helper\TestAutoEnum;
 use mle86\Enum\Tests\Helper\TestEmptyAutoEnum;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Tests the functionality of the library's {@see AbstractAutoEnum} base class.
+ *
+ * This test class is based on two included dummy implementation, {@see TestAutoEnum} and {@see TestEmptyAutoEnum},
+ * which are extensions of the {@see AbstractAutoEnumTest} base class.
+ *
+ * The following tests are performed:
+ *
+ *  - Ensure that all public class constants are recognized as valid enum values.
+ *  - Ensure that protected and private class constants are _not_ recognized as valud enum values.
+ *  - Ensure that the `all()` class method returns all public constants' values and nothing else.
+ *  - Ensure that an empty auto-enum class still works as intended, that is:
+ *     - Its `all()` method returns an empty array.
+ *     - Several test values accepted by a different auto-enum class are rejected.
+ */
 class AbstractAutoEnumTest extends TestCase
 {
     use AssertException;
