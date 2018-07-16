@@ -2,6 +2,7 @@
 
 namespace mle86\Enum\Tests\Helper;
 
+use mle86\Enum\Exception\EnumValueException;
 use PHPUnit\Framework\AssertionFailedError;
 use PHPUnit\Framework\TestCase;
 
@@ -43,6 +44,28 @@ trait AssertException
         }
 
         throw new AssertionFailedError($message, 0, $ex);
+    }
+
+    protected function assertExceptionMessageContainsWord(string $word, \Exception $e, string $message = ''): void
+    {
+        if ($message === '') {
+            $message = 'Enum exception message does not contain expected word!';
+        }
+
+        $regex = '/(?:\b|^|(?<=\s))' . preg_quote($word, '/') . '(?:\b|$|(?=\s))/u';
+        $this->assertRegExp($regex, $e->getMessage(), $message);
+    }
+
+    protected function assertExceptionMessageContainsValue($value, \Exception $e): void
+    {
+        $this->assertExceptionMessageContainsWord((string)$value, $e,
+            'Enum exception message does not contain the invalid input value!');
+    }
+
+    protected function assertExceptionContainsValueCopy($value, EnumValueException $e): void
+    {
+        $this->assertSame($value, $e->getInvalidValue(),
+            'Enum exception does not contain the original invalid value!');
     }
 
 }

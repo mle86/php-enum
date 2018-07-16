@@ -2,11 +2,9 @@
 
 namespace mle86\Enum;
 
-use mle86\Enum\AbstractEnum;
 use mle86\Enum\Tests\Helper\AssertException;
 use mle86\Enum\Tests\Helper\FirstTenPrimesEnum;
 use mle86\Enum\Exception\EnumValueException;
-use mle86\Value\AbstractSerializableValue;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -235,29 +233,6 @@ class AbstractEnumTest extends TestCase
         $this->assertExceptionContainsValueCopy   ($invalid_value, $ex);
         $this->assertExceptionMessageContainsValue($expected_value, $ex);
         $this->assertExceptionMessageContainsWord ('my_prime', $ex);
-    }
-
-
-    private function assertExceptionMessageContainsWord(string $word, \Exception $e, string $message = ''): void
-    {
-        if ($message === '') {
-            $message = 'Enum exception message does not contain expected word!';
-        }
-
-        $regex = '/\b' . preg_quote($word, '/') . '\b/u';
-        $this->assertRegExp($regex, $e->getMessage(), $message);
-    }
-
-    private function assertExceptionMessageContainsValue($value, \Exception $e): void
-    {
-        $this->assertExceptionMessageContainsWord((string)$value, $e,
-            'Enum exception message does not contain the invalid input value!');
-    }
-
-    private function assertExceptionContainsValueCopy($value, EnumValueException $e): void
-    {
-        $this->assertSame($value, $e->getInvalidValue(),
-            'Enum exception does not contain the original invalid value!');
     }
 
 }
