@@ -212,6 +212,8 @@ class AbstractEnumTest extends TestCase
      * as well as the target enum class name
      * remains readable in the resulting EnumValueException.
      *
+     * More tests of this kind are done in the {@see EnumExceptionTest} class.
+     *
      * @dataProvider readableInvalidInput
      * @depends testInstantiateValidValues
      * @depends testInvalidValues
