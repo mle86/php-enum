@@ -44,7 +44,7 @@ here are several recommendations for enum inheritance.
 [AutoEnumTrait]: Class_AutoEnumTrait.md
 
 
-## Recommendations for Enum Interitance with this Library
+## Recommendations for Enum Inheritance with this Library
 
 1. Avoid if possible.
 
@@ -127,4 +127,5 @@ Undesirable effects:
 - `EngineType::validate()` is likewise nonfunctional on raw values.
 - There are no automatic checks in place to ensure that the various `EngineType` subclass values do not accidentally overlap.
   (While there are no checks like that in our [AbstractEnum] base class either,
-  having all constants in a single class at least makes mistakes like that easiert to find.)
+  having all constants in a single class at least makes mistakes like that easier to find.)
+
