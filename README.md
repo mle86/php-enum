@@ -140,9 +140,11 @@ function ($state, $optionalState) {
 * [Enum] base interface:
   * [AbstractEnum] base class.
     * [AbstractAutoEnum] base class.
+* [AutoEnumTrait] trait.
 * [Exception][Exceptions] classes.
 
 [Enum]: doc/Class_Enum.md
 [AbstractAutoEnum]: doc/Class_AbstractAutoEnum.md
 [AbstractEnum]: doc/Class_AbstractEnum.md
+[AutoEnumTrait]: doc/Class_AutoEnumTrait.md
 [Exceptions]: doc/Exceptions.md
