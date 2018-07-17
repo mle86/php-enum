@@ -3,9 +3,9 @@
 Common interface for all enum classes.
 
 [Exceptions]: Exceptions.md
-[Enum]: Class_Enum.php
-[AbstractEnum]: Class_AbstractEnum.php
-[AbstractAutoEnum]: Class_AbstractAutoEnum.php
+[Enum]: Class_Enum.md
+[AbstractEnum]: Class_AbstractEnum.md
+[AbstractAutoEnum]: Class_AbstractAutoEnum.md
 
 
 ## Interface Details
