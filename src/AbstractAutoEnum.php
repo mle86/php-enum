@@ -23,20 +23,9 @@ abstract class AbstractAutoEnum extends AbstractEnum
     {
         $className = static::class;
         if (!isset(self::$_all_list[$className])) {
-            self::$_all_list[$className] = self::getPublicConstants($className);
+            self::$_all_list[$className] = Misc::getPublicConstants($className);
         }
         return self::$_all_list[$className];
-    }
-
-    private static function getPublicConstants(string $className): array
-    {
-        $reflectionClass = new \ReflectionClass($className);
-        $fnPublicFilter = function(\ReflectionClassConstant $constant): bool { return $constant->isPublic(); };
-        $fnGetValue = function(\ReflectionClassConstant $constant) { return $constant->getValue(); };
-
-        return array_map($fnGetValue, array_filter(
-            $reflectionClass->getReflectionConstants(),
-            $fnPublicFilter));
     }
 
 }
