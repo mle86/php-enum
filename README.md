@@ -121,7 +121,7 @@ and more explicit validation:
 
 ```php
 <?php
-function ($state, $optionalState) {
+function ($state, $optionalState = null) {
     TriState::validate($state);
     // Now we can be sure that $state contains a valid TriState value
     // (or maybe it's even a TriState instance).
