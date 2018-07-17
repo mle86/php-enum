@@ -31,7 +31,7 @@ Its only dependency is the
 [mle86/value](https://github.com/mle86/php-value) library.
 
 
-## Minimum PHP version:
+## Minimum PHP Version:
 
 PHP 7.1
 
@@ -135,7 +135,7 @@ function ($state, $optionalState) {
 ```
 
 
-## Classes and interfaces:
+## Classes and Interfaces:
 
 * [Enum] base interface:
   * [AbstractEnum] base class.
