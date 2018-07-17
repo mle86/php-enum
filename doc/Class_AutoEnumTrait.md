@@ -6,7 +6,7 @@ default implementation of the `all()` class method.
 
 (In fact the [AbstractAutoEnum] class uses this trait as well.)
 
-This might be useful in case of enum class hierarchies
+This might be useful in case of [enum class hierarchies](Enum_Inheritance.md)
 where you don't want your abstract base classes to have an `all()` method,
 but you'll still need it in the leaf subclasses.
 

@@ -148,3 +148,8 @@ function ($state, $optionalState = null) {
 [AbstractEnum]: doc/Class_AbstractEnum.md
 [AutoEnumTrait]: doc/Class_AutoEnumTrait.md
 [Exceptions]: doc/Exceptions.md
+
+
+## More Documentation:
+
+* [Enum Inheritance](doc/Enum_Inheritance.md) – how to extend enum classes.

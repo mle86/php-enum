@@ -6,7 +6,7 @@ use mle86\Enum\AbstractAutoEnum;
 /**
  * @internal
  */
-class TestEmptyAutoEnum extends AbstractAutoEnum
+final class TestEmptyAutoEnum extends AbstractAutoEnum
 {
 
 }

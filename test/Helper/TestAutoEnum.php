@@ -7,7 +7,7 @@ use mle86\Enum\AbstractAutoEnum;
 /**
  * @internal
  */
-class TestAutoEnum extends AbstractAutoEnum
+final class TestAutoEnum extends AbstractAutoEnum
 {
 
     public const C10 = 10;

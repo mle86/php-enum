@@ -7,7 +7,7 @@ use mle86\Enum\AbstractEnum;
 /**
  * @internal
  */
-class FirstTenPrimesEnum extends AbstractEnum
+final class FirstTenPrimesEnum extends AbstractEnum
 {
 
     public const PRIME1  = 2;

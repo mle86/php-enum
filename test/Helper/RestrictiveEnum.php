@@ -9,7 +9,7 @@ use mle86\Enum\AbstractEnum;
  *   This dummy implementation is used in the {@see EnumExceptionTest} class.
  *   It only accepts one input value: 100.
  */
-class RestrictiveEnum extends AbstractEnum
+final class RestrictiveEnum extends AbstractEnum
 {
 
     public const ONLY_ALLOWED_VALUE = 100;
