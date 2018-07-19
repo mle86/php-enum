@@ -70,7 +70,7 @@ There's three ways to
 
 1. Just use the class constants.  
     You don't really need this library to do that
-    as you can simply write a class without methods for that,
+    as you can simply write a standalone class for that,
     but it's definitely a possibility.
 
 2. Build instances and use typehints in your methods.  
