@@ -153,4 +153,5 @@ function ($state, $optionalState = null) {
 ## More Documentation:
 
 * [Enum Inheritance](doc/Enum_Inheritance.md) – how to extend enum classes.
+* [Serializability](doc/Serializability.md) – how Enum instances can be serialized.
 * [Type Safety](doc/Type_Safety.md) – notes about enum value types and typecasting.
