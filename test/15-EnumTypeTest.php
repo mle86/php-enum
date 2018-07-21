@@ -113,6 +113,21 @@ class EnumTypeTest extends TestCase
         $this->assertSameEnumValue($validInput, $instanceValue);
     }
 
+    /**
+     * All {@see AbstractEnum} implementations are descendants of {@see AbstractSerializableValue}
+     * so they are {@see \JsonSerializable} as well!
+     * Make sure json_decode(json_encode(enumInstance)) still returns the correct type and value.
+     *
+     * @dataProvider mixedTypeInputs
+     * @depends testOutputValueTypes
+     * @depends testMixedInputTypes
+     */
+    public function testJsonOutputValueTypes($validInput): void
+    {
+        $jsonValue = $this->jsonTranscode(new MixedTypeEnum($validInput));
+        $this->assertSameEnumValue($validInput, $jsonValue, true);
+    }
+
 
     private function assertSameEnumValue($inputValue, $enumOutputValue, bool $allowFloatConversionDelta = false): void
     {
@@ -126,6 +141,21 @@ class EnumTypeTest extends TestCase
             // Values of all other types must match exactly:
             $this->assertSame($inputValue, $enumOutputValue);
         }
+    }
+
+    private function jsonTranscode($inputValue)
+    {
+        $encoded = json_encode($inputValue);
+        if (json_last_error() !== \JSON_ERROR_NONE) {
+            throw new \RuntimeException("json_encode failed: " . json_last_error_msg());
+        }
+
+        $decoded = json_decode($encoded, true);
+        if (json_last_error() !== \JSON_ERROR_NONE) {
+            throw new \RuntimeException("json_decode failed: " . json_last_error_msg());
+        }
+
+        return $decoded;
     }
 
 }
