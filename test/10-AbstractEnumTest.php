@@ -43,10 +43,27 @@ class AbstractEnumTest extends TestCase
         [29],
     ]; }
 
+    public static function validArrayInput(): array { return [
+        [array()],
+        [array(7)],
+        [array(7, 11)],
+        [array(7, new FirstTenPrimesEnum(11))],
+        [array(new FirstTenPrimesEnum(7), new FirstTenPrimesEnum(11))],
+    ]; }
+
     public static function invalidInput(): array { return [
         [8],
         [0],
         [-3],
+    ]; }
+
+    public static function invalidArrayInput(): array { return [
+        [array(8)],
+        [array(8, null)],
+        [array(8, 7)],
+        [array(8, new FirstTenPrimesEnum(7))],
+        [array(7, 8)],
+        [array(new FirstTenPrimesEnum(7), 8)],
     ]; }
 
     public static function illegalInput(): array { return [
@@ -239,6 +256,62 @@ class AbstractEnumTest extends TestCase
         $this->assertExceptionContainsValueCopy   ($invalid_value, $ex);
         $this->assertExceptionMessageContainsValue($expected_value, $ex);
         $this->assertExceptionMessageContainsWord ('my_prime', $ex);
+    }
+
+    /**
+     * Tests {@see AbstractEnum::validateArray()}
+     * and {@see AbstractEnum::validateOptionals()}.
+     *
+     * @dataProvider validArrayInput
+     * @depends testValidValues
+     * @depends testInvalidValues
+     */
+    public function testArrayValidatorsWithValidValues(iterable $validInput): void
+    {
+        FirstTenPrimesEnum::validateArray($validInput);
+
+        FirstTenPrimesEnum::validateOptionals($validInput);
+
+        $validInput = array_merge([null], $validInput, [null]);
+        FirstTenPrimesEnum::validateOptionals($validInput);
+    }
+
+    /**
+     * The {@see validArrayInput} data provider
+     * already contains an empty array input
+     * so this test is already performed in {@see testArrayValidatorsWithValidValues}
+     * but it doesn't hurt to be explicit.
+     *
+     * @depends testValidValues
+     * @depends testInvalidValues
+     * @depends testArrayValidatorsWithValidValues
+     */
+    public function testArrayValidatorsWithNulls(): void
+    {
+        FirstTenPrimesEnum::validateArray([]);
+        FirstTenPrimesEnum::validateOptionals([]);
+        FirstTenPrimesEnum::validateOptionals([null]);
+        FirstTenPrimesEnum::validateOptionals([null, null]);
+    }
+
+    /**
+     * @dataProvider invalidArrayInput
+     * @depends testValidValues
+     * @depends testInvalidValues
+     * @depends testArrayValidatorsWithValidValues
+     */
+    public function testArrayValidatorsWithInvalidValues(iterable $invalidInput): void
+    {
+        $this->assertException(EnumValueException::class, function() use($invalidInput) {
+            FirstTenPrimesEnum::validateArray($invalidInput);
+        });
+        $this->assertException(EnumValueException::class, function() use($invalidInput) {
+            FirstTenPrimesEnum::validateOptionals($invalidInput);
+        });
+        $this->assertException(EnumValueException::class, function() use($invalidInput) {
+            $invalidInput = array_merge([null], $invalidInput, [null]);
+            FirstTenPrimesEnum::validateOptionals($invalidInput);
+        });
     }
 
 }

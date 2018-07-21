@@ -38,6 +38,26 @@ trait EnumValidationTrait
 
     /**
      * Like {@see validate()},
+     * but ensures that the input is an array (or other `iterable`)
+     * and that _all_ values in it pass the {@see validate()} check
+     * (i.e. are an enum instance or an enum value).
+     *
+     * Empty input arrays are acceptable.
+     *
+     * @param iterable|mixed[]|static[] $values
+     * @param string|null $forKey
+     * @return void if all input values are valid enum values or instances.
+     * @throws EnumValueException if at least one of the input values is not valid.
+     */
+    public static function validateArray(iterable $values, string $forKey = null): void
+    {
+        foreach ($values as $value) {
+            self::validate($value, $forKey);
+        }
+    }
+
+    /**
+     * Like {@see validate()},
      * but always accepts NULL values
      * (even if the {@see isValid} test method does not accept them).
      *
@@ -57,6 +77,24 @@ trait EnumValidationTrait
 
         // value is non-null, so it has to pass the regular validate() checks:
         static::validate($value, $forKey);
+    }
+
+    /**
+     * Like {@see validateOptional()},
+     * but ensures that the input is an array (or other `iterable`)
+     * and that _all_ values in it pass the {@see validateOptional()} check
+     * (i.e. are an enum instance, an enum value, or `NULL`).
+     *
+     * @param iterable|mixed[]|static[]|null[] $values
+     * @param string|null $forKey
+     * @return void Returns if the input array contains only enum values, enum instances, and/or NULLs.
+     * @throws EnumValueException if the input array contains at least one non-NULL value that is not valid.
+     */
+    public static function validateOptionals(iterable $values, string $forKey = null): void
+    {
+        foreach ($values as $value) {
+            self::validateOptional($value, $forKey);
+        }
     }
 
 }
