@@ -40,6 +40,13 @@ Additionally, it provides the `validate()` and `validateOptional()` helper metho
     Throws an [EnumValueException][Exceptions]
     if the input value is not valid.
 
+* <code>static <b>validateArray</b> iterable $values, string $forKey = null): void</code>  
+    Like `validate()`,
+    but ensures that the input is an array (or other `iterable`)
+    and that _all_ values in it pass the `validate()` check
+    (i.e. are an enum instance or an enum value).  
+    Empty input arrays are acceptable.
+
 * <code>static <b>validateOptional</b> ($value, string $forKey = null): void</code>  
     Like `validate()`,
     but always accepts NULL values
@@ -47,6 +54,12 @@ Additionally, it provides the `validate()` and `validateOptional()` helper metho
     This is useful for optional values.  
     Throws an [EnumValueException][Exceptions]
     if the input value is not NULL and not valid.
+
+* <code>static <b>validateOptionals</b> ($value, string $forKey = null): void</code>  
+    Like `validateOptional()`,
+    but ensures that the input is an array (or other `iterable`)
+    and that _all_ values in it pass the `validateOptional()` check
+    (i.e. are an enum instance, an enum value, or `NULL`).
 
 
 ## Inherited Methods
