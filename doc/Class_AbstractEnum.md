@@ -40,7 +40,7 @@ Additionally, it provides the `validate()` and `validateOptional()` helper metho
     Throws an [EnumValueException][Exceptions]
     if the input value is not valid.
 
-* <code>static <b>validateArray</b> iterable $values, string $forKey = null): void</code>  
+* <code>static <b>validateArray</b> (iterable $values, string $forKey = null): void</code>  
     Like `validate()`,
     but ensures that the input is an array (or other `iterable`)
     and that _all_ values in it pass the `validate()` check
@@ -55,7 +55,7 @@ Additionally, it provides the `validate()` and `validateOptional()` helper metho
     Throws an [EnumValueException][Exceptions]
     if the input value is not NULL and not valid.
 
-* <code>static <b>validateOptionals</b> ($value, string $forKey = null): void</code>  
+* <code>static <b>validateOptionals</b> (iterable $value, string $forKey = null): void</code>  
     Like `validateOptional()`,
     but ensures that the input is an array (or other `iterable`)
     and that _all_ values in it pass the `validateOptional()` check
