@@ -44,14 +44,14 @@ class EnumTypeTest extends TestCase
      * @dataProvider validInputs
      * @param int $validInput
      */
-    public function testValidInstance(int $validInput): void
+    public function testValidInput(int $validInput): void
     {
         RestrictiveEnum::validate($validInput);
     }
 
     /**
      * @dataProvider invalidInputs
-     * @depends testValidInstance
+     * @depends testValidInput
      * @param $invalidInput
      */
     public function testInvalidInput($invalidInput): void
