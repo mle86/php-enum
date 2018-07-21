@@ -10,13 +10,13 @@ without issues,
 both of which are built-in PHP functions.
 
 Instances can also be JSON-serialized
-with the built-in [json_encode()](https://php.net/manual/function.json_encode.php)
+with the built-in [json_encode()](https://php.net/manual/function.json-encode.php)
 provided that their value itself is JSON-serializable
 (which they ought to be:
 [it is recommended to have only string/int/null enum constants](Type_Safety.md)).
 
 Such JSON serializations of Enum instances
-can of course be unserialized with [json_decode()](https://php.net/manual/function.json_decode.php).
+can of course be unserialized with [json_decode()](https://php.net/manual/function.json-decode.php).
 This will however not return an Enum instance
 but just their wrapped value:
 
