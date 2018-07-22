@@ -11,7 +11,8 @@ and many languages that support enums in the first place
 don't support enum inheritance at all.
 
 **This library attempts to support basic enum inheritance**
-by making `isValid()` accept all subclass instances.
+by making <code>[AbstractEnum]::isValid()</code>
+accept all subclass instances.
 This has a few notable effects:
 
 - Enum class hierarchies work as expected:
