@@ -6,7 +6,8 @@ use mle86\Enum\Exception\EnumValueException;
 
 /**
  * This trait contains the enum validation helper methods
- * ({@see validate}, {@see validateOptional}).
+ * ({@see validate}, {@see validateOptional},
+ *  {@see validateArray}, {@see validateOptionals}).
  *
  * It is used by the {@see AbstractEnum} base class
  * (and therefore by the {@see AbstractAutoEnum} base class as well).
