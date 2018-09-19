@@ -94,8 +94,11 @@ class EnumExceptionTest extends TestCase
     {
         $this->withInvalidInput(
             $invalidInput,
-            function(EnumValueException $e) use($expectedRepresentation): void {
+            function(EnumValueException $e) use($expectedRepresentation, $invalidInput): void {
                 $this->assertExceptionMessageContainsWord($expectedRepresentation, $e);
+
+                // The exception class also contains a special getter to get the original invalid value:
+                $this->assertSame($invalidInput, $e->getInvalidValue());
             });
     }
 
@@ -185,6 +188,30 @@ class EnumExceptionTest extends TestCase
                 $regex = "/\b{$class}.+{$value}\b/u";
                 $this->assertRegExp($regex, $e->getMessage());
             });
+    }
+
+    /**
+     * @depends testDefaultRepresentations
+     */
+    public function testSpecialGetters(): void
+    {
+        $fnTestGetters = function($invalidValue, ?string $useKey): void {
+            /** @var EnumValueException $ex */
+            $ex = $this->assertException(EnumValueException::class, function() use($invalidValue, $useKey) {
+                RestrictiveEnum::validate($invalidValue, $useKey);
+            });
+
+            // getInvalidValue() should return the original invalid value unchanged:
+            $this->assertSame($invalidValue, $ex->getInvalidValue());
+            // getUsedKey() should return the original validate($forKey) string argument unchanged:
+            $this->assertSame($useKey, $ex->getUsedKey());
+        };
+
+        $fnTestGetters("foo*bar", null);
+        $fnTestGetters(-91.33,    null);
+
+        $fnTestGetters("zog+baz", 'k1');
+        $fnTestGetters(-97.22,    'myInputKey');
     }
 
 
