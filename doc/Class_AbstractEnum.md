@@ -13,8 +13,8 @@ Additionally, it provides the `validate()` and `validateOptional()` helper metho
 [Enum]: Class_Enum.md
 [AbstractEnum]: Class_AbstractEnum.md
 [AbstractAutoEnum]: Class_AbstractAutoEnum.md
-[AbstractSerializableValue]: ../vendor/mle86/value/src/Value/AbstractSerializableValue.php
-[AbstractValue]: ../vendor/mle86/value/src/Value/AbstractValue.php
+[AbstractSerializableValue]: https://github.com/mle86/php-value/blob/v1.x/src/Value/AbstractSerializableValue.php
+[AbstractValue]: https://github.com/mle86/php-value/blob/v1.x/src/Value/AbstractValue.php
 
 
 ## Class Details
