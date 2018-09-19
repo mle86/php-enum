@@ -34,11 +34,27 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
         return $o;
     }
 
+    /**
+     * Returns the invalid value that was the reason for this exception.
+     *
+     * For this to work, it must have been instantiated through the {@see forClass} or {@see forKey} constructors
+     * (the {@see EnumValidationTrait::validate}… methods do that correctly).
+     *
+     * @return mixed
+     */
     public function getInvalidValue()
     {
         return $this->invalidValue;
     }
 
+    /**
+     * Returns the input key that was used with an invalid value.
+     *
+     * For this to work, it must have been instantiated through the {@see forKey} constructor
+     * (the {@see EnumValidationTrait::validate}… methods do that correctly if a key is provided).
+     *
+     * @return string|null
+     */
     public function getUsedKey(): ?string
     {
         return $this->usedKey;
