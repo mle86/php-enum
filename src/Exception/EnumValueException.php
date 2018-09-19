@@ -7,9 +7,18 @@ use mle86\Value\Value;
 
 /**
  * Thrown in case of an invalid invalid value.
+ *
+ * These exceptions are thrown by the {@see Enum::__construct} constructor (implemented in {@see AutoEnum})
+ * and by the {@see EnumValidationTrait::validate}… methods (used in {@see AutoEnum}).
  */
 class EnumValueException extends \InvalidArgumentException implements EnumException
 {
+
+    /*
+     * Don't use the default constructor --
+     * the forClass/forKey constructors add useful extra information to the exception
+     * which can later be retrieved with the getInvalidValue/getUsedKey getters.
+     */
 
     private $invalidValue;
     private $usedKey;
