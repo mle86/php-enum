@@ -12,6 +12,7 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
 {
 
     private $invalidValue;
+    private $usedKey;
 
     public static function forClass($value, $enumClass): self
     {
@@ -29,12 +30,18 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
 
         $o = new self("not a valid '{$key}': {$shortValue}");
         $o->invalidValue = $value;
+        $o->usedKey      = $key;
         return $o;
     }
 
     public function getInvalidValue()
     {
         return $this->invalidValue;
+    }
+
+    public function getUsedKey(): ?string
+    {
+        return $this->usedKey;
     }
 
     private static function getShortClassName($class): string
