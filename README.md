@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/mle86/php-enum.svg?branch=master)](https://travis-ci.org/mle86/php-enum)
 [![Coverage Status](https://coveralls.io/repos/github/mle86/php-enum/badge.svg?branch=master)](https://coveralls.io/github/mle86/php-enum?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/mle86/enum/version)](https://packagist.org/packages/mle86/enum)
+[![PHP 7.1](https://img.shields.io/badge/php-7.1-8892BF.svg?style=flat)](https://php.net/)
 [![License](https://poser.pugx.org/mle86/enum/license)](https://packagist.org/packages/mle86/enum)
 
 
