@@ -6,8 +6,7 @@
 [AbstractEnum] subclass instances
 can be serialized with [serialize()](https://php.net/manual/function.serialize.php)
 and unserialized with [unserialize()](https://php.net/manual/function.unserialize.php)
-without issues,
-both of which are built-in PHP functions.
+without issues.
 
 Instances can also be JSON-serialized
 with the built-in [json_encode()](https://php.net/manual/function.json-encode.php)

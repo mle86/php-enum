@@ -97,7 +97,7 @@ Reasoning:
 abstract class CarPartType extends AbstractEnum { }
 abstract class EngineType extends CarPartType { }
 
-class CombustionEngineType extends EngineType
+final class CombustionEngineType extends EngineType
 {
     use AutoEnumTrait;
 
@@ -106,7 +106,7 @@ class CombustionEngineType extends EngineType
     const LNG    = 3;
 }
 
-class ElectricEngineType extends EngineType
+final class ElectricEngineType extends EngineType
 {
     use AutoEnumTrait;
 
