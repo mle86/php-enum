@@ -1,10 +1,10 @@
 # `AutoEnumTrait` Trait
 
 This trait can be added to any Enum class
-that wants a [AbstractAutoEnum]-style
+that wants an [AbstractAutoEnum]-style
 default implementation of the `all()` class method.
 
-(In fact the [AbstractAutoEnum] class uses this trait as well.)
+(In fact the [AbstractAutoEnum] class uses this trait itself.)
 
 This might be useful in case of [enum class hierarchies](Enum_Inheritance.md)
 where you don't want your abstract base classes to have an `all()` method,

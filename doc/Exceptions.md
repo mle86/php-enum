@@ -7,4 +7,4 @@ All custom exceptions live in the <code>[mle86\\Enum\\Exception\\](../src/Except
     Implemented by all exception classes in this library.
 
 * **[`EnumValueException`](../src/Exception/EnumValueException.php)**  
-    Thrown in case of an invalid invalid value.
+    Thrown in case of an invalid value.
