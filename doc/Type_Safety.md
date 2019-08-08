@@ -36,9 +36,9 @@ is actually an enum instance or just a raw value:
 <?php
 function ($triState) {
     TriState::validate($triState);
-    /* Now we know that $triState is either a raw TriState enum value (i.e. just a string)
-     * or maybe even a TriState instance (which has a value() getter and an equals() tester).
-     * But thanks to __toString we can do simple comparions:  */
+    // Now we know that $triState is either a raw TriState enum value (i.e. just a string)
+    // or maybe even a TriState instance (which has a value() getter and an equals() tester).
+    // But thanks to __toString we can do simple comparisons:  */
     if ($triState == TriState::HIGH) {
         // NB: This has to be a "==" comparison!
         // It won't work as expected with the type-safe "===" comparison.
@@ -47,7 +47,7 @@ function ($triState) {
 }
 ```
 
-Or course it would be much cleaner
+Of course it would be much cleaner
 to enforce explicit type safety through typehints:
 
 ```php
