@@ -25,6 +25,7 @@
   },
 
   "require-dev": {
+    "ext-json": "*",
     "phpunit/phpunit": "^7.1.5",
     "php-coveralls/php-coveralls": "^2.0",
     "roave/security-advisories": "dev-master"
