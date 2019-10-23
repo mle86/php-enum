@@ -100,7 +100,6 @@ class AbstractAutoEnumTest extends TestCase
         $knownList = array_map($fn_unwrap, self::validValues());
 
         $classList = TestAutoEnum::all();
-        $this->assertInternalType('array', $classList);
 
         // The AbstractAutoEnum base class makes no promises about `all()`'s ordering,
         // so we need to sort both lists once:

@@ -2,9 +2,6 @@
 namespace mle86\Enum;
 
 use mle86\Enum\Exception\EnumValueException;
-use mle86\Enum\Tests\Helper\Inheritance\BaseEnum;
-use mle86\Enum\Tests\Helper\Inheritance\ExtendedEnum1;
-use mle86\Enum\Tests\Helper\Inheritance\ExtendedEnum2;
 use mle86\Enum\Tests\Helper\MixedTypeEnum;
 use mle86\Enum\Tests\Helper\MyString;
 use mle86\Enum\Tests\Helper\RestrictiveEnum;
@@ -134,8 +131,7 @@ class EnumTypeTest extends TestCase
         if (is_float($inputValue) && $allowFloatConversionDelta) {
             // here we allow for a tiny conversion leeway:
             $delta = 1e-7;
-            $this->assertInternalType('float', $enumOutputValue);
-            $this->assertEquals($inputValue, $enumOutputValue, "Float value mismatch", $delta);
+            $this->assertEqualsWithDelta($inputValue, $enumOutputValue, $delta, "Float value mismatch");
 
         } else {
             // Values of all other types must match exactly:
