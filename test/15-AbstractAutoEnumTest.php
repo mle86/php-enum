@@ -110,6 +110,27 @@ class AbstractAutoEnumTest extends TestCase
     }
 
     /**
+     * Ensure that {@see AbstractAutoEnum::all()} returns an associative array
+     * with the enum const names as keys.
+     *
+     * @depends testAllValidValues
+     */
+    public function testAllValidKeys(): void
+    {
+        $classList = TestAutoEnum::all();
+
+        $this->assertArrayHasKey('C10', $classList);
+        $this->assertArrayHasKey('C20', $classList);
+        $this->assertArrayHasKey('C30', $classList);
+        $this->assertArrayNotHasKey('W40', $classList);
+        $this->assertArrayNotHasKey('Y50', $classList);
+        $this->assertCount(3, $classList);
+
+        $this->assertSame(TestAutoEnum::C10, $classList['C10']);
+        $this->assertSame(TestAutoEnum::C30, $classList['C30']);
+    }
+
+    /**
      * @depends testAllValidValues
      */
     public function testEmptyEnumClass(): void

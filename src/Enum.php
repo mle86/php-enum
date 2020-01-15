@@ -46,7 +46,9 @@ interface Enum extends Value
      * Everything returned by this method is a valid input for the constructor
      * and will pass the {@see isValid()} test method.
      *
-     * The list should only contain unique values.
+     * The list should only contain unique values
+     * and it should be an associative array
+     * with the constant names as array names.
      *
      * @return iterable
      */

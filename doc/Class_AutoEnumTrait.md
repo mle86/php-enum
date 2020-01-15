@@ -23,4 +23,5 @@ but you'll still need it in the leaf subclasses.
 ## Method Reference
 
 * <code>static <b>all</b> (): array</code>  
-    Returns a list of all public constant values in this class.
+    Returns a list of all public constant values in this class
+    (as an associative array with the constants' names as keys).

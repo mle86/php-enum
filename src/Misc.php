@@ -16,12 +16,17 @@ final class Misc
     public static function getPublicConstants(string $className): array
     {
         $reflectionClass = new \ReflectionClass($className);
-        $fnPublicFilter = function(\ReflectionClassConstant $constant): bool { return $constant->isPublic(); };
-        $fnGetValue = function(\ReflectionClassConstant $constant) { return $constant->getValue(); };
 
-        return array_map($fnGetValue, array_filter(
-            $reflectionClass->getReflectionConstants(),
-            $fnPublicFilter));
+        $output = [];
+        foreach ($reflectionClass->getReflectionConstants() as $rc) {
+            if (!$rc->isPublic()) {
+                continue;
+            }
+
+            $output[$rc->getName()] = $rc->getValue();
+        }
+
+        return $output;
     }
 
 }

@@ -21,7 +21,8 @@ extend this class, put some constants in it, done.
 ## Method Reference
 
 * <code>static <b>all</b> (): array</code>  
-    Returns a list of all public constant values in this class.
+    Returns a list of all public constant values in this class
+    (as an associative array with the constants' names as keys).
 
 
 ## Inherited Methods

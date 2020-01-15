@@ -22,7 +22,8 @@ trait AutoEnumTrait
     /**
      * Returns a list of all public constant values in this class.
      *
-     * @return array
+     * @return array  Returns an associative array with the enum const names as keys
+     *                and the enum values as values.
      */
     public static function all(): array
     {
