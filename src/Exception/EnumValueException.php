@@ -6,7 +6,7 @@ use mle86\Enum\Enum;
 use mle86\Value\Value;
 
 /**
- * Thrown in case of an invalid invalid value.
+ * Thrown in case of an invalid input value.
  *
  * These exceptions are thrown by the {@see Enum::__construct} constructor (implemented in {@see AutoEnum})
  * and by the {@see EnumValidationTrait::validate}… methods (used in {@see AutoEnum}).
