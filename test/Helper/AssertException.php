@@ -56,7 +56,7 @@ trait AssertException
         }
 
         $regex = '/(?:\b|^|(?<=\s))' . preg_quote($word, '/') . '(?:\b|$|(?=\s))/u';
-        $this->assertRegExp($regex, $e->getMessage(), $message);
+        $this->assertMatchesRegularExpression($regex, $e->getMessage(), $message);
     }
 
     protected function assertExceptionMessageContainsValue($value, \Exception $e): void

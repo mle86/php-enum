@@ -76,7 +76,7 @@ class EnumExceptionTest extends TestCase
 
                 $reFqcnOrShcn = '(?:' . preg_quote($fqcn, '/') . '|' . preg_quote($shcn, '/') . ')';
 
-                $this->assertRegExp("/^(?:not a valid|invalid) {$reFqcnOrShcn}\b/u", $e->getMessage());
+                $this->assertMatchesRegularExpression("/^(?:not a valid|invalid) {$reFqcnOrShcn}\b/u", $e->getMessage());
             });
     }
 
@@ -134,7 +134,7 @@ class EnumExceptionTest extends TestCase
             $this->withInvalidInput(
                 $invalidInput,
                 function(EnumValueException $e) use($regex): void {
-                    $this->assertRegExp($regex, $e->getMessage());
+                    $this->assertMatchesRegularExpression($regex, $e->getMessage());
                 });
         };
 
@@ -186,7 +186,7 @@ class EnumExceptionTest extends TestCase
             $other,
             function(EnumValueException $e) use($class, $value) {
                 $regex = "/\b{$class}.+{$value}\b/u";
-                $this->assertRegExp($regex, $e->getMessage());
+                $this->assertMatchesRegularExpression($regex, $e->getMessage());
             });
     }
 
