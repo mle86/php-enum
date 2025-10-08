@@ -25,7 +25,7 @@ trait EnumValidationTrait
      * @return void Returns if the value is valid.
      * @throws EnumValueException if the input value is not valid.
      */
-    public static function validate($value, string $forKey = null): void
+    public static function validate($value, ?string $forKey = null): void
     {
         if (!static::isValid($value)) {
             // invalid!
@@ -50,7 +50,7 @@ trait EnumValidationTrait
      * @return void if all input values are valid enum values or instances.
      * @throws EnumValueException if at least one of the input values is not valid.
      */
-    public static function validateArray(iterable $values, string $forKey = null): void
+    public static function validateArray(iterable $values, ?string $forKey = null): void
     {
         foreach ($values as $value) {
             self::validate($value, $forKey);
@@ -69,7 +69,7 @@ trait EnumValidationTrait
      * @return void Returns if the value is valid or NULL.
      * @throws EnumValueException if the input value is not NULL and not valid.
      */
-    public static function validateOptional($value, string $forKey = null): void
+    public static function validateOptional($value, ?string $forKey = null): void
     {
         if ($value === null) {
             // ok, we explicitly allow this here without further checks
@@ -91,7 +91,7 @@ trait EnumValidationTrait
      * @return void Returns if the input array contains only enum values, enum instances, and/or NULLs.
      * @throws EnumValueException if the input array contains at least one non-NULL value that is not valid.
      */
-    public static function validateOptionals(iterable $values, string $forKey = null): void
+    public static function validateOptionals(iterable $values, ?string $forKey = null): void
     {
         foreach ($values as $value) {
             self::validateOptional($value, $forKey);
