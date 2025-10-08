@@ -45,7 +45,16 @@ abstract class AbstractEnum extends AbstractSerializableValue implements Enum
      */
     public static function isValid($value): bool
     {
-        return ($value instanceof static || in_array($value, static::all(), true));
+        if ($value instanceof static) {
+            return true;
+        }
+
+        $allValues = static::all();  // iterable
+        if ($allValues instanceof \Traversable) {
+            $allValues = iterator_to_array($allValues);
+        }
+
+        return in_array($value, $allValues, true);
     }
 
 }
