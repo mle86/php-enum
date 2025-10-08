@@ -20,9 +20,15 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
      * which can later be retrieved with the getInvalidValue/getUsedKey getters.
      */
 
+    /** @var mixed */
     private $invalidValue;
+    /** @var string */
     private $usedKey;
 
+    /**
+     * @param mixed $value
+     * @param Enum|class-string<Enum> $enumClass
+     */
     public static function forClass($value, $enumClass): self
     {
         $shortClass = self::getShortClassName($enumClass);
@@ -33,6 +39,9 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
         return $o;
     }
 
+    /**
+     * @param mixed $value
+     */
     public static function forKey($value, string $key): self
     {
         $shortValue = self::getShortValue($value);
@@ -69,6 +78,10 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
         return $this->usedKey;
     }
 
+    /**
+     * @param object|class-string $class
+     * @return string
+     */
     private static function getShortClassName($class): string
     {
         if (is_object($class)) {
@@ -83,6 +96,9 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
         return $class;
     }
 
+    /**
+     * @param mixed $value
+     */
     private static function getShortValue($value, int $stringLimit = 50): string
     {
         if ($value === null) {

@@ -13,6 +13,10 @@ namespace mle86\Enum;
 final class Misc
 {
 
+    /**
+     * @param class-string $className
+     * @return array<string, mixed>
+     */
     public static function getPublicConstants(string $className): array
     {
         $reflectionClass = new \ReflectionClass($className);
