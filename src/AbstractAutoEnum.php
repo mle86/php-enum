@@ -10,6 +10,9 @@ namespace mle86\Enum;
  * extend this class, put some constants in it, done.
  *
  * (Internally, it simply uses the {@see AutoEnumTrait}.)
+ *
+ * @template T
+ * @extends AbstractEnum<T>
  */
 abstract class AbstractAutoEnum extends AbstractEnum
 {

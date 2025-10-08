@@ -15,6 +15,10 @@ use function in_array;
  * in case of invalid input.
  *
  * Additionally, it provides the {@see validate()} and {@see validateOptional()} helper methods.
+ *
+ * @template T
+ * @implements Enum<T>
+ * @extends AbstractSerializableValue<T>
  */
 abstract class AbstractEnum extends AbstractSerializableValue implements Enum
 {

@@ -26,8 +26,9 @@ class EnumValueException extends \InvalidArgumentException implements EnumExcept
     private $usedKey;
 
     /**
-     * @param mixed $value
-     * @param Enum|class-string<Enum> $enumClass
+     * @template T
+     * @param T|mixed $value
+     * @param Enum<T>|class-string<Enum<T>> $enumClass
      */
     public static function forClass($value, $enumClass): self
     {

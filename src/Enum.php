@@ -13,6 +13,9 @@ use mle86\Value\Value;
  *  - All enum classes have an {@see isValid()} class method that tests single values.
  *  - All enum classes can be instantiated with a valid value which they will then wrap.
  *  - All enum classes have a {@see value()} method which returns the wrapped value.
+ *
+ * @template T
+ * @extends Value<T>
  */
 interface Enum extends Value
 {
@@ -28,7 +31,7 @@ interface Enum extends Value
      * In this case, their wrapped value will be re-wrapped,
      * resulting in two identical instances.
      *
-     * @param mixed $value
+     * @param T|static|mixed $value
      * @throws EnumValueException if the input value is not valid.
      */
     public function __construct($value);
@@ -36,7 +39,7 @@ interface Enum extends Value
     /**
      * Returns the value wrapped by this enum instance.
      *
-     * @return mixed
+     * @return T
      */
     public function value();
 
@@ -50,7 +53,7 @@ interface Enum extends Value
      * and it should be an associative array
      * with the constant names as array names.
      *
-     * @return iterable
+     * @return iterable<T>
      */
     public static function all(): iterable;
 
@@ -59,7 +62,7 @@ interface Enum extends Value
      *
      * Instances of the same class are also considered valid.
      *
-     * @param mixed|static $value
+     * @param T|static|mixed $value
      * @return bool
      */
     public static function isValid($value): bool;

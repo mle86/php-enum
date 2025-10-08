@@ -17,13 +17,16 @@ namespace mle86\Enum;
 trait AutoEnumTrait
 {
 
+    /**
+     * @var array<class-string, array<string, mixed>>
+     */
     private static $_all_list = [];
 
     /**
      * Returns a list of all public constant values in this class.
      *
-     * @return array  Returns an associative array with the enum const names as keys
-     *                and the enum values as values.
+     * @return array<string, mixed>  Returns an associative array with the enum const names as keys
+     *                               and the enum values as values.
      */
     public static function all(): array
     {
